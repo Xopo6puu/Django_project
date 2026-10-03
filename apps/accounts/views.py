@@ -66,6 +66,15 @@ class AccountView(LoginRequiredMixin, UpdateView):
         return context
 
 
+class PasswordChangeView(auth_views.PasswordChangeView):
+    template_name = "accounts/change_password.html"
+    success_url = reverse_lazy("accounts:profile")
+
+    def form_valid(self, form: Any) -> HttpResponse:
+        messages.success(self.request, "Пароль успішно змінено.")
+        return super().form_valid(form)
+
+
 class PasswordResetView(auth_views.PasswordResetView):
     template_name = "accounts/forgot_password.html"
     email_template_name = "accounts/emails/password_reset_email.txt"

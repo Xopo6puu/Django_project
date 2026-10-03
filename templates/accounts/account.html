@@ -124,6 +124,7 @@
               <input type="hidden" name="warehouse_ref" value="{{ form.warehouse_ref.value|default:'' }}">
             </div>
             <button type="submit" class="button button--primary button--full-width">Зберегти</button>
+            <a href="{% url 'accounts:password_change' %}" class="button button--secondary button--full-width">Змінити пароль</a>
             <button type="submit" form="logout-form" class="button button--secondary button--full-width" id="logout-button">Вийти</button>
           </form>
           <form id="logout-form" method="post" action="{% url 'accounts:logout' %}" hidden>{% csrf_token %}</form>

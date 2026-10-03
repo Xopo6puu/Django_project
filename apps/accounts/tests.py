@@ -96,3 +96,42 @@ def test_city_without_branch_is_an_error(client: Client, user: User, nova_poshta
     )
 
     assert "warehouse_name" in response.context["form"].errors
+
+
+def test_user_can_change_password(client: Client, user: User) -> None:
+    client.force_login(user)
+
+    response = client.post(
+        reverse("accounts:password_change"),
+        {
+            "old_password": "secret-pass-123",
+            "new_password1": "New-secret-456",
+            "new_password2": "New-secret-456",
+        },
+    )
+
+    assert response.status_code == 302
+    assert response.url == reverse("accounts:profile")
+
+    user.refresh_from_db()
+    assert user.check_password("New-secret-456")
+
+
+def test_user_cannot_change_password_with_wrong_old_password(
+    client: Client, user: User
+) -> None:
+    client.force_login(user)
+
+    response = client.post(
+        reverse("accounts:password_change"),
+        {
+            "old_password": "wrong-password",
+            "new_password1": "New-secret-456",
+            "new_password2": "New-secret-456",
+        },
+    )
+
+    assert response.status_code == 200
+
+    user.refresh_from_db()
+    assert user.check_password("secret-pass-123")
