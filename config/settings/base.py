@@ -8,6 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 environ.Env.read_env(BASE_DIR / ".env.local")
 
+
 env = environ.Env()
 
 SECRET_KEY = env("SECRET_KEY")

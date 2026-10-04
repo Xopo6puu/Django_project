@@ -3,7 +3,7 @@ name = "module3-final-project"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<4.0"
 dependencies = [
     "django>=6.1.1",
     "django-environ>=0.14.0",
@@ -29,6 +29,7 @@ dev = [
     "djangorestframework-stubs[compatible-mypy]",
     "types-django-filter>=26.1.0.20260906",
     "types-requests>=2.33.0.20260906",
+    "pytest-env (>=1.7.1,<2.0.0)",
 ]
 
 [tool.pytest.ini_options]
@@ -36,7 +37,10 @@ DJANGO_SETTINGS_MODULE = "config.settings.local"
 testpaths = ["apps", "tests"]
 python_files = ["test_*.py", "tests.py"]
 addopts = "-ra --ignore=local_docs"
-
+env_files = [
+    ".env.local",
+    ".env.dev"
+]
 
 [tool.ruff]
 line-length = 100
@@ -87,3 +91,7 @@ ignore_missing_imports = true
 
 [tool.django-stubs]
 django_settings_module = "config.settings.local"
+
+
+[tool.poetry]
+package-mode = false
