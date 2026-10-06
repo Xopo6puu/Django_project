@@ -4,10 +4,10 @@ from .views import (
     AccountView,
     LoginView,
     LogoutView,
+    PasswordChangeView,
     PasswordResetConfirmView,
     PasswordResetView,
     RegisterView,
-    PasswordChangeView,
 )
 
 app_name = "accounts"
