@@ -111,7 +111,7 @@ def test_user_can_change_password(client: Client, user: User) -> None:
     )
 
     assert response.status_code == 302
-    assert response.url == reverse("accounts:profile")
+    assert response.headers["Location"] == reverse("accounts:profile")
 
     user.refresh_from_db()
     assert user.check_password("New-secret-456")

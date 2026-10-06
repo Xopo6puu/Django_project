@@ -37,10 +37,7 @@ DJANGO_SETTINGS_MODULE = "config.settings.local"
 testpaths = ["apps", "tests"]
 python_files = ["test_*.py", "tests.py"]
 addopts = "-ra --ignore=local_docs"
-env_files = [
-    ".env.local",
-    ".env.dev"
-]
+
 
 [tool.ruff]
 line-length = 100
