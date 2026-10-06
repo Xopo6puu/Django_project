@@ -54,7 +54,7 @@ class ProductSerializer(serializers.ModelSerializer):
         if Product.objects.filter(slug=slugify(name)).exists():
             raise serializers.ValidationError()
 
-        self.create(validated_data)
+        return super().create(validated_data)
 
 class ProductShortSerializer(serializers.ModelSerializer):
     class Meta:
