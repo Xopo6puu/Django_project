@@ -48,13 +48,13 @@ class ProductSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ("slug", "created_at", "updated_at")
 
-
     def create(self, validated_data: dict[str, Any]):
         name = validated_data["name"]
         if Product.objects.filter(slug=slugify(name)).exists():
             raise serializers.ValidationError()
 
         return super().create(validated_data)
+
 
 class ProductShortSerializer(serializers.ModelSerializer):
     class Meta:

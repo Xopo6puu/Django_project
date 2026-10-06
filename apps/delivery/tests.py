@@ -23,7 +23,6 @@ def post(monkeypatch) -> Mock:
     return mock
 
 
-
 def test_client_sends_model_and_method_in_body(post: Mock) -> None:
     post.return_value = api_answer(
         [{"Ref": "c1", "Description": "Львів", "AreaDescription": "Львівська"}]
@@ -36,7 +35,6 @@ def test_client_sends_model_and_method_in_body(post: Mock) -> None:
     assert (body["modelName"], body["calledMethod"]) == ("Address", "getCities")
     assert body["methodProperties"]["FindByString"] == "Льв"
     assert cities[0].label == "Львів (Львівська обл.)"
-
 
 
 def test_client_keeps_only_requested_kind_of_warehouse(post: Mock) -> None:
@@ -53,13 +51,11 @@ def test_client_keeps_only_requested_kind_of_warehouse(post: Mock) -> None:
     assert [w.ref for w in branches] == ["w1"]
 
 
-
 def test_client_raises_when_api_says_no(post: Mock) -> None:
     post.return_value = api_answer([], success=False, errors=["API key is invalid"])
 
     with pytest.raises(NovaPoshtaError, match="API key is invalid"):
         NovaPoshtaClient("bad", API_URL).search_cities("Київ")
-
 
 
 def test_city_not_found_is_an_empty_list(post: Mock) -> None:

@@ -70,7 +70,6 @@ class Order(TimeStampedModel):
         """An order can be cancelled until it has been shipped."""
         return self.status in (self.OrderStatus.PENDING, self.OrderStatus.PAID)
 
-
     # def save(self, *args, **kwargs):
     #     # Спочатку зберігаємо саме замовлення, щоб у нього з'явився ID в базі (якщо це нове замовлення)
     #     is_new = self.pk is None
@@ -125,4 +124,4 @@ class OrderItem(models.Model):
 
     @property
     def total(self) -> Decimal:
-            return Decimal(self.quantity) * self.price
+        return Decimal(self.quantity) * self.price

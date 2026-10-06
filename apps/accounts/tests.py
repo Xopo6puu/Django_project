@@ -117,9 +117,7 @@ def test_user_can_change_password(client: Client, user: User) -> None:
     assert user.check_password("New-secret-456")
 
 
-def test_user_cannot_change_password_with_wrong_old_password(
-    client: Client, user: User
-) -> None:
+def test_user_cannot_change_password_with_wrong_old_password(client: Client, user: User) -> None:
     client.force_login(user)
 
     response = client.post(

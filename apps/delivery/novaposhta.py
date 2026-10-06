@@ -53,7 +53,7 @@ class NovaPoshtaClient:
             "apiKey": self.api_key,
             "modelName": model,
             "calledMethod": method,
-            "methodProperties": properties
+            "methodProperties": properties,
         }
         try:
             response = requests.post(self.api_url, json=payload, timeout=self.timeout)
@@ -95,7 +95,6 @@ class NovaPoshtaClient:
             return []
 
         return addresses
-
 
     def search_warehouses(
         self, city_ref: str, query: str = "", postomat: bool = False, limit: int = 20

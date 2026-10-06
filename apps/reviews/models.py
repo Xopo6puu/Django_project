@@ -29,7 +29,7 @@ class Review(TimeStampedModel):
         ordering = ["-created_at"]
         verbose_name = "відгук"
         verbose_name_plural = "відгуки"
-    # Створюємо унікальне обмеження на рівні бази даних для пари (user, product)
+        # Створюємо унікальне обмеження на рівні бази даних для пари (user, product)
         constraints = [
             models.UniqueConstraint(fields=["user", "product"], name="unique_user_product_review")
         ]
