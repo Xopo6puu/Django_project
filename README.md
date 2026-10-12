@@ -26,7 +26,8 @@ uv, gunicorn, whitenoise, Caddy, Docker Compose, GitHub Actions.
 Потрібні [uv](https://docs.astral.sh/uv/) і PostgreSQL.
 
 ```bash
-cp .env.example .env.local          # заповнити DATABASE_URL, SECRET_KEY, NOVA_POSHTA_API_KEY
+cp .env.example .env.local          # створити локальний файл налаштувань
+# Для запуску без Docker змінити DATABASE_URL на postgresql://postgres:postgres@localhost:5432/final3 (manage.py використовує config.settings.local за замовчуванням)
 uv sync
 uv run manage.py migrate
 uv run manage.py seed_shop          # демо-каталог, покупці, замовлення, відгуки
@@ -39,7 +40,7 @@ uv run manage.py runserver
 ## Docker локально
 
 ```bash
-cp .env.example .env.dev            # DJANGO_SETTINGS_MODULE=config.settings.dev, DATABASE_URL=...@db:5432/...
+cp .env.example .env.dev            # значення вже налаштовані для Docker (хост БД: db)
 docker compose up --build
 ```
 
